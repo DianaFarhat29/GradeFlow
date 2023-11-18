@@ -31,9 +31,7 @@
         git clone https://github.com/your-username/GradeFlow.git
             
       2. Set Up the Database: Configure your database settings in the application.properties file under src/main/resources.
-
       3. Run the Application: Use Spring Boot's built-in server to run the application.
-
       4. Access the Application: Open your browser and navigate to http://localhost:8080 to start using GradeFlow.
 
 # Conclusion
