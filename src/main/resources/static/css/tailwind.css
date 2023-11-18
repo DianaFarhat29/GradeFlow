@@ -1,0 +1,105 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.homeBox {
+  background:
+  radial-gradient(circle farthest-side at 0% 50%,#ffffff 23.5%,#0000 0)46.2px 66px,
+  radial-gradient(circle farthest-side at 0% 50%,#7de663 24%,#0000 0)41.8px 66px,
+  linear-gradient(#ffffff 14%,#0000 0, #0000 85%,#ffffff 0)0 0,
+  linear-gradient(150deg,#ffffff 24%,#7de663 0,#7de663 26%,#0000 0,#0000 74%,#7de663 0,#7de663 76%,#ffffff 0)0 0,
+  linear-gradient(30deg,#ffffff 24%,#7de663 0,#7de663 26%,#0000 0,#0000 74%,#7de663 0,#7de663 76%,#ffffff 0)0 0,
+  linear-gradient(90deg,#7de663 2%,#ffffff 0,#ffffff 98%,#7de663 0%)0 0 #ffffff;
+background-size: 88px 132px;
+background-color: #ffffff;
+}
+
+.rollerDiv{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .rollerDiv h1{
+    text-align:center;
+    text-transform: uppercase;
+    font-size: 5rem;
+  }
+  
+  .roller{
+    height: 95%;
+    line-height: 6rem;
+    position: relative;
+    overflow: hidden; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .roller #rolltext {
+    position: absolute;
+    top: 0;
+    animation: slide 10s infinite;  
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes slide {
+    0%{
+      top:0;
+    }
+    20%{
+      top: -12rem;    
+    }
+    40%{
+      top: -24rem;
+    }
+    60%{
+      top: -36rem;
+    }
+    95%{
+        top: 0rem;
+      }
+  }
+
+  
+  @media screen and (max-width: 600px){
+    .rollerDiv h1{
+    text-align:center;
+    text-transform: uppercase;
+    color: #F1FAEE; 
+    font-size: 2.125rem;
+  }
+    
+    .roller{
+    height: 2.6rem; 
+    line-height: 2.125rem;  
+    }
+    
+    .roller #rolltext {  
+    animation: slide-mob 5s infinite;  
+  }
+    
+    @keyframes slide-mob {
+    0%{
+      top:0;
+    }
+    20%{
+      top: -2.125rem;    
+    }
+    40%{
+      top: -4.25rem;
+    }
+    60%{
+      top: -6.375rem;
+    }
+    80%{
+        top: -8.5rem;
+      }
+  }
+  }
+
+  form input {
+    background-color: white !important;
+  }
+

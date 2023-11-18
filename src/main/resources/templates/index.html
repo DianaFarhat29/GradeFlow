@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>My Spring Boot App</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie.min.js"></script>
+</head>
+
+<body class="h-screen w-screen overflow-x-hidden overflow-y-hidden bg-gray-200 font-mainFont relative">
+
+    <header class="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 ">
+        <!-- logo -->
+        <h1 class="w-3/12 h-full flex flex-row items-center gap-2 ">
+            <img th:src="@{/media/pomme.png}" class="h-12 w-12 hover:text-greenLogo duration-200" alt="Logo">
+            <span class="text-3xl">GradeFlow</span>
+        </h1>
+        <!-- Link for Logo: <a href="https://www.flaticon.com/fr/icones-gratuites/pomme" title="pomme icônes">Pomme icônes créées par Freepik - Flaticon</a>-->
+        <!-- Link for student icon: <div> Icons made by <a href="https://www.flaticon.com/authors/khld939" title="khld939"> khld939 </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>-->
+        <!-- Link for deconnexion icon:<a href="https://www.flaticon.com/free-icons/logout" title="logout icons">Logout icons created by Pixel perfect - Flaticon</a>-->
+
+
+        <!-- navigation -->
+        <nav class="nav font-semibold text-lg">
+            <ul class="flex items-center">
+                <li>
+                    <a class="flex flex-col text-center items-center group bg-opacity-100 cursor-pointer"
+                        th:href="@{/index}">
+                        <span class="my-6 px-12  duration-200 group-hover:text-greenLogo">Home</span>
+                        <span
+                            class="h-1 bg-gradient-to-r from-white via-greenLogo to-white w-full invisible group-hover:visible "></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col text-center  group bg-opacity-100 cursor-pointer" th:href="@{/student}">
+                        <span class="my-6 px-12  duration-200 group-hover:text-greenLogo">Students</span>
+                        <span
+                            class="h-1 bg-gradient-to-r from-white via-greenLogo to-white w-full invisible group-hover:visible "></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col text-center  group bg-opacity-100 cursor-pointer" th:href="@{/course}">
+                        <span class="my-6 px-12  duration-200 group-hover:text-greenLogo">Courses</span>
+                        <span
+                            class="h-1 bg-gradient-to-r from-white via-greenLogo to-white w-full invisible group-hover:visible "></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col text-center  group bg-opacity-100 cursor-pointer" th:href="@{/grade}">
+                        <span class="my-6 px-12  duration-200 group-hover:text-greenLogo">Grades</span>
+                        <span
+                            class="h-1 bg-gradient-to-r from-white via-greenLogo to-white w-full invisible group-hover:visible "></span>
+                    </a>
+            </ul>
+        </nav>
+
+        <!-- buttons -->
+        <div class="w-3/12 flex justify-end">
+            <a th:href="@{/}">
+                <img th:src="@{/media/logout.png}" class="h-8 w-8 hover:text-greenLogo duration-200" alt="Deconnexion">
+            </a>
+        </div>
+    </header>
+
+    <main class="w-full h-5/6 flex justify-center items-center ">
+
+        <div class="w-2/3 h-3/5  shadow-md rounded-md  flex flex-col">
+            <div class="h-1/4 w-full rounded-t-md text-6xl text-black flex flex-row items-center py-20 px-20 bg-greenLogoTint">
+                <span> Welcome to <span class="font-bold"> GradeFlow, </span>
+            </div>
+            <div class="w-full h-full flex flex-col bg-white">
+                <div class=" rounded-t-md text-black text-6xl flex flex-col justify-start items-center px-20 pt-10">
+                    <span class="pb-5"> manage your </span>
+                </div>
+                <div class="rollerDiv flex flex-col flex-1   ">
+
+                    <div class="area">
+                        <ul class="circles">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="roller  ">
+                        <span id="rolltext" class="text-black font-bold">
+                            <h1>Students</h1><br />
+                            <h1>Courses </h1><br />
+                            <h1>Grades </h1><br />
+                            <h1>Classes. </h1><br />
+                    </div>
+                </div>
+
+                <div class="w-full h-1/4 text-4xl flex justify-center items-center text-white bg-greenLogoTint">
+                    Please use the navbar to select your options.</span>
+                </div>
+            </div>
+
+
+
+
+
+    </main>
+
+
+    <footer class="bg-white shadow dark:bg-gray-800 w-full fixed bottom-0 left-0">
+        <div class="w-full px-7 py-4 flex justify-between">
+            <span class="text-sm text-gray-500 item-left dark:text-gray-400">© 2023 <a href=""
+                    class="hover:underline">GradeFlow™</a>. All Rights Reserved.
+            </span>
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+                <li>
+                    <a th:href="@{/index}" class="mr-4 hover:underline md:mr-6">Home</a>
+                </li>
+                <li>
+                    <a th:href="@{/student}" class="mr-4 hover:underline md:mr-6">Students</a>
+                </li>
+                <li>
+                    <a th:href="@{/course}" class="mr-4 hover:underline md:mr-6">Courses</a>
+                </li>
+                <li>
+                    <a th:href="@{/grade}" class="mr-4 hover:underline md:mr-6">Grades</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+
+
+</body>
+
+
+
+
+
+
+</html>

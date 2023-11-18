@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>My Spring Boot App</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.6/lottie.min.js"></script>
+</head>
+
+<body class="h-screen w-screen overflow-x-hidden overflow-y-hidden bg-gray-200 font-mainFont relative">
+
+    <main class="w-full h-5/6 flex justify-center items-center ">
+
+        <section class="bg-gray-50 w-full">
+            <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                
+                <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-black ">
+                    <div class="flex flex-row gap-5 items-center">
+                        <img th:src="@{/media/pomme.png}" class="h-12 w-12" alt="Logo">
+                        <p class="text-3xl">GradeFlow</p>
+                    </div>
+                </a>
+                <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-greenLogo">
+                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <h1 class="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-black">
+                            Sign in to your account
+                        </h1>
+                        <form  th:action="@{/perform_login}" method="post" class="space-y-4 md:space-y-6" >
+                            <div>
+                                <label for="username" class="block mb-2 text-sm font-bold text-black">Your username</label>
+                                <input type="text" name="username" id="username" class=" text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5" placeholder="username" required="">
+                            </div>
+                            <div>
+                                <label for="password" class="block mb-2 text-sm font-bold text-black">Password</label>
+                                <input type="password" name="password" id="password" placeholder="••••••••" class="bg-white text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5" required="">
+                            </div>
+                            <button type="submit" class="w-full text-black font-bold bg-white focus:ring-4 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center hover:bg-black hover:text-white">Sign in</button>
+                            <div th:if="${param.error}">
+                                <p style="color: red;">Invalid username or password.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </section>
+
+
+    </main>
+
+
+    <footer class="bg-white shadow dark:bg-gray-800 w-full fixed bottom-0 left-0">
+        <div class="w-full px-7 py-4 flex justify-between">
+            <span class="text-sm text-gray-500 item-left dark:text-gray-400">© 2023 <a href=""
+                    class="hover:underline">GradeFlow™</a>. All Rights Reserved.
+            </span>
+
+        </div>
+    </footer>
+
+
+
+</body>
+
+
+
+
+
+
+</html>

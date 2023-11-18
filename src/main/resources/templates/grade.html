@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Student Page</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+</head>
+
+<body class="h-screen w-screen overflow-y-hidden overflow-x-hidden bg-gray-200 font-mainFont relative">
+    <header class="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 ">
+        <!-- logo -->
+        <h1 class="w-3/12 h-full flex flex-row items-center gap-2 ">
+            <img th:src="@{/media/pomme.png}" class="h-12 w-12 hover:text-greenLogo duration-200" alt="Logo">
+            <span class="text-3xl">GradeFlow</span>
+        </h1>
+        <!-- Link for Logo: <a href="https://www.flaticon.com/fr/icones-gratuites/pomme" title="pomme icônes">Pomme icônes créées par Freepik - Flaticon</a>-->
+        <!-- Link for student icon: <div> Icons made by <a href="https://www.flaticon.com/authors/khld939" title="khld939"> khld939 </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>-->
+        <!-- Link for deconnexion icon:<a href="https://www.flaticon.com/free-icons/logout" title="logout icons">Logout icons created by Pixel perfect - Flaticon</a>-->
+
+
+        <!-- navigation -->
+        <nav class="nav font-semibold text-lg">
+            <ul class="flex items-center">
+                <li>
+                    <a class="flex flex-col text-center items-center group bg-opacity-100 cursor-pointer"
+                        th:href="@{/index}">
+                        <span class="my-6 px-12  duration-200 group-hover:text-greenLogo">Home</span>
+                        <span
+                            class="h-1 bg-gradient-to-r from-white via-greenLogo to-white w-full invisible group-hover:visible "></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col text-center  group bg-opacity-100 cursor-pointer" th:href="@{/student}">
+                        <span class="my-6 px-12  duration-200 group-hover:text-greenLogo">Student</span>
+                        <span
+                            class="h-1 bg-gradient-to-r from-white via-greenLogo to-white w-full invisible group-hover:visible "></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col text-center  group bg-opacity-100 cursor-pointer" th:href="@{/course}">
+                        <span class="my-6 px-12  duration-200 group-hover:text-greenLogo">Courses</span>
+                        <span
+                            class="h-1 bg-gradient-to-r from-white via-greenLogo to-white w-full invisible group-hover:visible "></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="flex flex-col text-center  group bg-opacity-100 cursor-pointer" th:href="@{/grade}">
+                        <span class="my-6 px-12  duration-200 group-hover:text-greenLogo">Grades</span>
+                        <span
+                            class="h-1 bg-gradient-to-r from-white via-greenLogo to-white w-full invisible group-hover:visible "></span>
+                    </a>
+            </ul>
+        </nav>
+
+        <!-- buttons -->
+        <div class="w-3/12 flex justify-end">
+            <a th:href="@{/login}">
+                <img th:src="@{/media/logout.png}" class="h-8 w-8 hover:text-greenLogo duration-200" alt="Deconnexion">
+            </a>
+        </div>
+    </header>
+    <div class="px-10 pt-10 text-4xl flex gap-2 items-end font-bold justify-center"> <img th:src="@{/media/gradesLogo.png}"
+        class="h-12 w-12 hover:text-greenLogo duration-200" alt="grades icon"> <span> Grades management </span>
+</div>
+    </div>
+
+    <main class="w-full h-full px-10 py-5 flex flex-col ">
+
+        <span> Please choose an option: </span>
+
+        <div class="w-full flex gap-10 py-2">
+            <div class="p-3 text-black bg-white w-fit h-fit rounded-md ">
+
+                <input type="checkbox" class=" peer/add" id="addButton" />
+                <span class="font-medium text-xl text-gray-600 w-fit p-2">Add a new grade</span>
+
+                <div class="w-fit bg-white p-4 rounded-md peer-checked/add:block hidden ">
+
+                    <form th:action="@{/grade/add}" th:object="${grade}" method="post" required
+                        class="grid gap-4 gap-y-2 text-sm ">
+                        <div class="lg:col-span-2">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-6">
+
+                               <input th:field="*{id}" hidden />
+
+                                <div class="md:col-span-1">
+                                    <label for="course">Course</label>
+                                    <select required th:field="*{course}" type="text" name="course" id="course"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                        <th:block th:each="course : ${courses}">
+                                            
+                                            <option th:value="${course.id}"  th:text="|${course.courseName} (${course.courseCode})|" ></option>
+                                        </th:block>
+                                 
+                                </select>
+                                </div>
+
+                                <div class="md:col-span-1">
+                                    <label for="student">Student</label>
+                                    <select required th:field="*{student}" type="text" name="student" id="student"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                        <th:block th:each="student : ${students}">
+                                            <option th:value="${student.id}"  th:text="|${student.firstName}  ${student.lastName} (${student.id})| "></option>
+                                        </th:block>
+                                 
+                                </select>
+                                    </div>
+
+                                <div class="md:col-span-1">
+                                    <label for="finalMarks">Final mark</label>
+                                    <input required th:field="*{finalMarks}" type="text"
+                                        name="finalMarks" id="finalMarks"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                </div>
+
+                                
+                                <div class="md:col-span-1">
+                                    <label for="semester">Semester</label>
+                                    <input required th:field="*{semester}" type="text"
+                                        name="semester" id="semester"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                </div>
+
+                                <div class="md:col-span-1">
+                                    <label for="year">Year</label>
+                                    <input required th:field="*{year}" type="text"
+                                        name="year" id="year"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                </div>
+                                <div class="md:col-span-1 flex justify-center ">
+
+                                    <div class="inline-flex items-end w-full">
+                                        <button type="submit"
+                                            class="bg-greenLogo hover:bg-white hover:text-greenLogo border border-white hover:border-greenLogo transition-colors text-white font-bold h-10 rounded flex justify-center items-center flex-nowrap w-full">Add
+                                            to list </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="p-3 text-black bg-white w-fit h-fit rounded-md ">
+
+                <input type="checkbox" class=" peer/edit" id="editButton" />
+                <span class="font-medium text-xl text-gray-600 w-fit p-2">Edit/delete an existing grade</span>
+
+                <div class="w-full bg-white p-4 rounded-md peer-checked/edit:block hidden">
+                    <form th:action="@{/grade/update}" th:object="${grade}" method="post" required
+                        class="grid gap-4 gap-y-2 text-sm ">
+                        <div class="lg:col-span-2">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-8">
+                                <div class="md:col-span-1">
+                                    <label for="gradeId">ID</label>
+                                    <select required id="gradeIds" th:field="*{id}"  onchange="loadgradeData()"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50 text-center">
+                                        <option selected value="">Choose an id</option>
+                                        <th:block th:each="grade : ${grades}">
+                                            <option th:value="${grade.id}"  th:text="${grade.id}" ></option>
+                                        </th:block>
+                                    </select>
+
+                                </div>
+                           
+                                <div class="md:col-span-1">
+                                    <label for="course">Course</label>
+                                    <select required th:field="*{course}" type="text" name="course" id="edit-course"
+                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                    <th:block th:each="course : ${courses}">
+                                        <option th:value="${course.id}"  th:text="|${course.courseName} (${course.courseCode})|" ></option>
+                                    </th:block>
+                             
+                            </select>
+                                </div>
+
+                                <div class="md:col-span-1">
+                                    <label for="student">Student</label>
+                                    <select required th:field="*{student}" type="text" name="student" id="edit-student"
+                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                    <th:block th:each="student : ${students}">
+                                        <option th:value="${student.id}"  th:text="|${student.firstName}  ${student.lastName} (${student.id})| "></option>
+                                    </th:block>
+                             
+                            </select>
+                                    </div>
+
+                                <div class="md:col-span-1">
+                                    <label for="finalMarks">Final mark</label>
+                                    <input required th:field="*{finalMarks}" type="text"
+                                        name="finalMarks" id="edit-finalMarks"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                </div>
+
+                                
+                                <div class="md:col-span-1">
+                                    <label for="semester">Semester</label>
+                                    <input required th:field="*{semester}" type="text"
+                                        name="semester" id="edit-semester"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                </div>
+
+                                <div class="md:col-span-1">
+                                    <label for="year">Year</label>
+                                    <input required th:field="*{year}" type="text"
+                                        name="year" id="edit-year"
+                                        class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                </div>
+
+                                <div class="inline-flex items-end">
+                                    <button type="submit" id="updateButton"
+                                        class="bg-greenLogo hover:bg-white hover:text-greenLogo border border-white hover:border-greenLogo transition-colors text-white font-bold h-10 rounded  flex justify-center items-center flex-nowrap w-full">Update</button>
+                                </div>
+                                <div class="inline-flex items-end">
+                                    <button type="button" id="deleteButton"
+                                        class="bg-red-600 hover:bg-white hover:text-red-600 border border-white hover:border-red-600 transition-colors text-white font-bold h-10 rounded flex justify-center items-center flex-nowrap w-full ">
+                                        Delete
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        </div>
+
+
+        <div class="w-full h-full gap-2 py-5 flex flex-col">
+
+            <div class="w-full flex ">
+                <form th:action="@{/grade/searchresults}" method="get"
+                    class="w-full h-full bg-white p-2 bg-opacity-75 text-sm shadow-md rounded-md flex justify-stretch">
+                    <div class="text-xl mb-4 flex justify-center items-center h-full px-5">  Grades list</div>
+                    <div class="h-full flex px-2 gap-5">
+                        <input type="text" th:value="*{id}" name="id" id="id"
+                               placeholder="Search by id..." class="border border-greyBack px-2 my-1 rounded" />
+                        <input type="text" th:value="*{courseId}" name="courseId" id="courseId"
+                               placeholder="Search by course id..." class="border border-greyBack px-2 my-1 rounded" />
+                        <input type="text" th:value="*{studentId}" name="studentId" id="studentId"
+                               placeholder="Search by student id..." class="border border-greyBack px-2 my-1 rounded" />
+                        <input type="text" th:value="*{semester}" name="semester" id="semester" placeholder="Search by semester..."
+                               class="border border-greyBack px-2 my-1 rounded" />
+                        <input type="text" th:value="*{year}" name="year" id="year" placeholder="Search by year..."
+                               class="border border-greyBack px-2 my-1 rounded" />
+                    <div>
+                    </div>
+                    </div>
+                    <div class="flex-1 h-full flex justify-end gap-2 px-2">
+                        <button type="submit"
+                            class="bg-black text-md hover:bg-white border my-1 border-white hover:border-greenLogo hover:text-black text-white font-bold py-1 px-8 rounded transition-colors flex justify-center items-center">Filtrer</button>
+                        <a th:href="@{/grade}"
+                            class="bg-gray-400 text-md hover:bg-white border my-1 border-greyBack hover:text-black text-white font-bold py-1 px-8 rounded transition-colors flex justify-center items-center">Reset</a>
+                    </div>
+                </form>
+
+            </div>
+            <div class="h-1/2 overflow-y-auto border-greyBack border-opacity-80  shadow-md rounded-md">
+
+                <div class="w-full flex flex-col h-full text-center bg-white  ">
+                    <table>
+                        <tr
+                            class="text-md w-full border-b-4 border-greyBack border-opacity-50 text-black font-bold  bg-grayList ">
+                            <th class="p-3 border-r  border-greyBack"> ID </th>
+                            <th class="p-3 border-r  border-greyBack"> Course (code)</th>
+                            <th class="p-3 border-r  border-greyBack"> Student (Id)</th>
+                            <th class="p-3 border-r  border-greyBack"> Final mark</th>
+                            <th class="p-3 border-r  border-greyBack"> Semester</th>
+                            <th class="p-3"> Year </th>
+
+
+                        </tr>
+
+                        <tr th:each="grade : ${grades}" th:if="${grades != null and !grades.isEmpty()}"
+                            class="text-sm w-full overflow-y flex-1 bg-white rounded-bl-md">
+                            <td th:text="${grade.id}"
+                            class="p-3 border-r border-b border-greyBack border-opacity-50 bg-white">
+                            Grade Id</td>
+                            <td th:text="|${grade.course.courseName} (${grade.course.courseCode})|"
+                                class="p-3 border-r border-b border-greyBack border-opacity-50 bg-white">
+                                Course code</td>
+                            <td th:text="|${grade.student.firstName}  ${grade.student.lastName} (${grade.student.id})| "
+                                class="p-3 border-r border-b border-greyBack border-opacity-50"> Student ID</td>
+                            <td th:text="|${grade.finalMarks} %|"
+                                class="p-3 border-r border-b border-greyBack border-opacity-50"> Final mark</td>
+                                <td th:text="${grade.semester}"
+                                class="p-3 border-r border-b border-greyBack border-opacity-50"> Semester</td>
+                                <td th:text="${grade.year}"
+                                class="p-3 border-r border-b border-greyBack border-opacity-50"> Year</td>
+                            
+                        </tr>
+
+                    </table>
+                    <div class="text-md w-full h-full gap-4 overflow-y flex-1 bg-white rounded-bl-md flex flex-col justify-center items-center"
+                        th:if="${grades.isEmpty()}">
+                        <span class="font-bold"> No result found. </span>
+                        <!-- Source of image: <a href="https://www.flaticon.com/free-icons/no-results" title="no results icons">No results icons created by Freepik - Flaticon</a> -->
+                        <img th:src="@{/media/noResults.png}" class="h-28 w-28" alt="noResult">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+
+    <footer class="bg-white shadow dark:bg-gray-800 w-full fixed bottom-0 left-0">
+        <div class="w-full px-7 py-4 flex justify-between">
+            <span class="text-sm text-gray-500 item-left dark:text-gray-400">© 2023 <a href=""
+                    class="hover:underline">GradeFlow™</a>. All Rights Reserved.
+            </span>
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+                <li>
+                    <a th:href="@{/index}" class="mr-4 hover:underline md:mr-6">Home</a>
+                </li>
+                <li>
+                    <a th:href="@{/student}" class="mr-4 hover:underline md:mr-6">Student</a>
+                </li>
+                <li>
+                    <a th:href="@{/course}" class="mr-4 hover:underline md:mr-6">Course</a>
+                </li>
+                <li>
+                    <a th:href="@{/grade}" class="mr-4 hover:underline md:mr-6">Grades</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var grades = /*[[${grades}]]*/[];
+        
+        function loadgradeData() {
+            var id = document.getElementById("gradeIds").value;
+            var selectedgrade = grades.find(s => s.id == id);
+            if (selectedgrade && id != "") {
+                document.getElementById("edit-course").value = selectedgrade.course.id;
+                document.getElementById("edit-student").value = selectedgrade.student.id;
+                document.getElementById("edit-finalMarks").value = selectedgrade.finalMarks;
+                document.getElementById("edit-semester").value = selectedgrade.semester;
+                document.getElementById("edit-year").value = selectedgrade.year;
+            }
+            console.log(selectedgrade);
+            console.log(id);
+            console.log(grades);
+        }
+        /*]]>*/
+
+        document.getElementById('deleteButton').addEventListener('click', function () {
+            var id = document.getElementById("gradeIds").value;
+            let validationDelete;
+            if(id !== "") {
+            validationDelete = prompt("Are you sure you want to delete this grade? (y/n)")
+            }
+            else {
+                alert("Choose an id of grade to delete.")
+            }
+
+            if (validationDelete == "y" ) {
+            fetch('grade/delete/' + id, { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/grade";
+                    } else {
+                        // Gérez les erreurs, montrez un message à l'utilisateur, etc.
+                        console.log("Tried to delete id# " + id)
+                        console.error('Erreur lors de la suppression');
+                    }
+                });
+            }
+            else {
+                window.location.href = "/grade";
+            }
+        });
+        
+
+    </script>
+
+</body>
+
+
+
+
+
+
+</html>
